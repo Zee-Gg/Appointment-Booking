@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  
+  /* Custom Palette: Clean White & Gold */
+  --background: #F8FAFC; /* Clean Whitish/Slate-50 Background */
+  --foreground: #1d2027; /* Deep Navy Text */
+  
+  --surface: #FFFFFF; /* White for cards */
+  
+  --primary: #E11D48; /* Rose-600 */
+  --primary-dark: #BE123C; /* Rose-700 */
+  --primary-light: #FFE4E6; /* Rose-100 */
+  
+  --secondary: #4B5563; /* Dark Gray for secondary text */
+  --accent: #E11D48; /* Rose-600 */
+  
+  --border: #E5E7EB; /* Light Gray Border */
 }
 
-@theme inline {
+/* Light theme defaults */
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Dark mode disabled to enforce brand palette */
 
+/* Base body styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply antialiased text-foreground bg-background;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+/* Utility classes for the new design */
+@layer utilities {
+  .container-width {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors duration-200 shadow-sm hover:shadow-md;
+  }
+  
+  .btn-outline {
+    @apply border border-border text-foreground px-6 py-3 rounded-lg font-medium hover:bg-surface transition-colors duration-200;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-serif font-bold text-foreground mb-4;
+  }
+  
+  .section-subtitle {
+    @apply text-primary font-semibold tracking-wide uppercase text-sm mb-2 block;
+  }
+
+  .section-padding {
+    @apply py-20 lg:py-32;
+  }
 }
